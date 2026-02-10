@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #1C1714;
+  --color-background-alt: #251E19;
+  --color-foreground: #E8DFD4;
+  --color-muted: #3D332B;
+  --color-muted-foreground: #9C8B7A;
+  --color-border: #4A3F35;
+  --color-accent: #C9A962;
+  --color-accent-secondary: #8B2635;
+  --color-accent-foreground: #1C1714;
+
+  --font-heading: "Cormorant Garamond", serif;
+  --font-body: "Crimson Pro", serif;
+  --font-display: "Cinzel", serif;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground font-body leading-relaxed;
+    position: relative;
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading tracking-tight;
+  }
+}
+
+@layer components {
+
+  /* Paper Texture Overlay */
+  .paper-texture {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalTurbulence' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  /* Vignette Effect */
+  .vignette {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 40;
+    background: radial-gradient(ellipse at center, transparent 0%, transparent 50%, rgba(28, 23, 20, 0.4) 100%);
+  }
+
+  /* Arch Top Signature */
+  .arch-top {
+    border-radius: 40% 40% 0 0 / 20% 20% 0 0;
+  }
+
+  /* Ornate Frame Corner Flourishes */
+  .ornate-frame {
+    position: relative;
+  }
+
+  .ornate-frame::before,
+  .ornate-frame::after {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #C9A962;
+    pointer-events: none;
+  }
+
+  .ornate-frame::before {
+    top: -1px;
+    left: -1px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .ornate-frame::after {
+    bottom: -1px;
+    right: -1px;
+    border-left: none;
+    border-top: none;
+  }
+
+  /* Ornate Divider */
+  .ornate-divider {
+    position: relative;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent 0%, #4A3F35 20%, #C9A962 50%, #4A3F35 80%, transparent 100%);
+    margin: 2rem 0;
+  }
+
+  .ornate-divider::after {
+    content: "✶";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #C9A962;
+    font-size: 12px;
+    background: #1C1714;
+    padding: 0 12px;
+  }
+
+  /* Drop Cap */
+  .drop-cap::first-letter {
+    @apply font-display text-7xl float-left mr-4 leading-[0.8] text-accent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Brass Gradient Button */
+  .btn-brass {
+    @apply font-display uppercase tracking-[0.15em] text-xs px-8 h-12 rounded flex items-center justify-center transition-all duration-300;
+    background: linear-gradient(180deg, #D4B872 0%, #C9A962 50%, #B8953F 100%);
+    color: #1C1714;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4), -1px -1px 1px rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .btn-brass:hover {
+    @apply brightness-110;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(0, 0, 0, 0.2), 0 4px 12px rgba(201, 169, 98, 0.3);
+  }
+
+  .btn-brass:active {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    transform: translateY(1px);
+  }
+
+  .sepia-image {
+    transition: filter 0.7s ease-out, transform 0.7s ease-out;
+  }
+
+  .sepia-image:hover {
+    transform: scale(1.05);
+  }
+}
