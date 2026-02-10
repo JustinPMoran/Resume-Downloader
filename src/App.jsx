@@ -2,16 +2,6 @@ import React from 'react';
 import { FileDown, School } from 'lucide-react';
 
 function App() {
-    const handleDownload = () => {
-        // Creating a link to the PDF in the root (which we'll move to public)
-        const link = document.createElement('a');
-        link.href = '/2.09 Resume - Justin Moran.pdf';
-        link.download = 'Justin Moran - Resume.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    };
-
     return (
         <>
             {/* Universal Atmospheric Overlays */}
@@ -71,18 +61,20 @@ function App() {
                             </div>
                         </div>
 
-                        {/* Download Action */}
                         <div className="flex flex-col items-center pt-8">
                             <div className="font-display text-[10px] tracking-[0.2em] text-muted-foreground uppercase mb-4">
                                 Proclamation of Credentials
                             </div>
-                            <button
-                                onClick={handleDownload}
-                                className="btn-brass group"
+                            <a
+                                href="/Resume-Justin-Moran.pdf"
+                                download="Justin-Moran-Resume.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn-brass group inline-flex items-center"
                             >
                                 <FileDown size={14} className="mr-3 group-hover:scale-110 transition-transform" />
                                 Download Resume
-                            </button>
+                            </a>
                             <div className="mt-8 text-[10px] font-display text-muted-foreground/30 uppercase tracking-[0.3em]">
                                 MDCCCXCVIII
                             </div>
